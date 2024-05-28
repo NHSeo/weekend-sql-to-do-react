@@ -36,7 +36,24 @@ router.post('/', (req, res) => {
 });
 
 // PUT
+router.put('/:id', (req, res) => {
+    console.log('req.params', req.params);
+    console.log('req.body', req.body);
 
+    let idToUpdate = req.params.id;
+    let updatedTitle = req.body.title;
+
+    let queryText = `UPDATE tasks SET title = $1 WHERE id = $2;`;
+    pool.query(queryText, [updatedTitle, idToUpdate])
+        .then(dbResult => {
+            console.log(dbResult);
+            res.sendStatus(200);
+        })
+        .catch(dbError => {
+            console.log('PUT Error:', dbError);
+            res.sendStatus(500);
+        });
+});
 
 // DELETE
 
