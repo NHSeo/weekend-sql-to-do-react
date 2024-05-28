@@ -56,5 +56,25 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE
+router.delete('/:id', (req, res) => {
+    console.log('req.params', req.params);
+
+    let idToDelete = req.params.id;
+
+    console.log('idToDelete', idToDelete);
+    console.log('typeof idToDelete', typeof idToDelete);
+
+    let queryText = `DELETE FROM tasks WHERE id = $1;`;
+
+    pool.query(queryText, [idToDelete])
+        .then(dbResult => {
+            console.log(dbResult);
+            res.sendStatus(200);
+        })
+        .catch(dbError => {
+            console.log('DELET Error', dbError);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;
