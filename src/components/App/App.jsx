@@ -37,14 +37,29 @@ function App () {
       setNewTask('');
     }).catch((error) => {
       console.log('Adding task Error', error);
-    });
+    })
   }
 
 
   return (
     <div>
+      <header>
       <h1>TO DO APP</h1>
       <h2>Hello world!</h2>
+      </header>
+      <main>
+        <h2>Add a Task</h2>
+        <form onSubmit={addTask}>
+          <label htmlFor="New-task">Task: </label>
+          <input id="New-task" onChange={(event) => setNewTask(event.target.value)} />
+          <button type="submit">Add Task</button>
+        </form>
+
+      </main>
+
+
+
+
     </div>
   );
 
