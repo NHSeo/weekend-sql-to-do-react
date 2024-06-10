@@ -54,20 +54,17 @@ function App () {
     axios({
       method: 'PUT',
       url: `/api/todo/${id}`,
-      data: { completed: true }
     }).then((response) => {
       fetchTasks();
     }).catch((error) => {
       console.error('Completing task Error', error);
     })
   }
-
-
   return (
     <div>
       <header>
-      <h1>TO DO APP</h1>
-      <h2>Hello world!</h2>
+        <h1>TO DO APP</h1>
+        <h2>Hello world!</h2>
       </header>
       <main>
         <h2>Add a Task</h2>
@@ -78,20 +75,36 @@ function App () {
         </form>
         <h2>Task List</h2>
         <ul className="Task-list">
-            {tasks.filter(task=> task.completed === false).map((task) =>{
-              return (
-                <li key={task.id} className={task.completed ? 'completed' : ''}>
-                  {task.title}
-                  {task.completed ? (
-                    <span> Completed </span>
-                  ) : (
-                      <>
-                        <button onClick={() => completeTask(task.id)}>Complete</button>
-                        <button onClick={() => deleteTask(task.id)}>Delete</button>
-                      </>
-                  )}
-                </li>
-              )})}
+          {tasks.filter(task => task.completed === false).map((task) => {
+            return (
+              <li key={task.id} className={task.completed ? 'completed' : ''}>
+                {task.title}
+                {task.completed ? (
+                  <span> Completed </span>
+                ) : (
+                  <>
+                    <button onClick={() => completeTask(task.id)}>Complete</button>
+                    <button onClick={() => deleteTask(task.id)}>Delete</button>
+                  </>
+                )}
+              </li>
+            )
+          })}
+          {tasks.filter(task => task.completed).map((task) => {
+            return (
+              <li key={task.id} className={task.completed ? 'completed' : ''}>
+                {task.title}
+                {task.completed ? (
+                  <span> - Completed</span>
+                ) : (
+                  <>
+                    <button onClick={() => completeTask(task.id)}>Complete</button>
+                    <button onClick={() => deleteTask(task.id)}>Delete</button>
+                  </>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </main>
     </div>
