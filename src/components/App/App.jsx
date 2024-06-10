@@ -23,6 +23,24 @@ function App () {
 
   useEffect(fetchTasks, []);
 
+  const addTask = (event) => {
+    event.preventDefault();
+
+    axios({
+      method: 'POST',
+      url: '/api/todo',
+      data: {
+        title: newTask
+      }
+    }).then((response) => {
+      fetchTasks();
+      setNewTask('');
+    }).catch((error) => {
+      console.log('Adding task Error', error);
+    });
+  }
+
+
   return (
     <div>
       <h1>TO DO APP</h1>
