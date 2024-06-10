@@ -76,15 +76,26 @@ function App () {
           <input id="New-task" onChange={(event) => setNewTask(event.target.value)} />
           <button type="submit">Add Task</button>
         </form>
-
+        <h2>Task List</h2>
+        <ul className="Task-list">
+            {tasks.filter(task=> task.completed === false).map((task) =>{
+              return (
+                <li key={task.id} className={task.completed ? 'completed' : ''}>
+                  {task.title}
+                  {task.completed ? (
+                    <span> Completed </span>
+                  ) : (
+                      <>
+                        <button onClick={() => completeTask(task.id)}>Complete</button>
+                        <button onClick={() => deleteTask(task.id)}>Delete</button>
+                      </>
+                  )}
+                </li>
+              )})}
+        </ul>
       </main>
-
-
-
-
     </div>
   );
-
 }
 
-export default App
+export default App;
