@@ -10,14 +10,18 @@ function App () {
     fetchTasks();
   }, []);
 
-  const fetchTasks = async () => {
-    try {
-      const response = await axios.get('/api/todo');
+  const fetchTasks = () => {
+    axios({
+      method: 'GET',
+      url: '/api/todo'
+    }).then((response) => {
       setTasks(response.data);
-    } catch (error) {
-      console.error('Error fetching tasks', error);
-    }
-  };
+    }).catch((error) => {
+      console.log('Fetching tasks Error', error);
+    });
+  }
+
+  useEffect(fetchTasks, []);
 
   return (
     <div>
