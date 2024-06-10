@@ -40,6 +40,16 @@ function App () {
     })
   }
 
+  const deleteTask = (id) => {
+    axios.delete(`/api/todo/${id}`)
+    .then((response) => {
+      fetchTasks();
+    })
+    .catch((error) => {
+      console.error('Deleting task Error', error);
+    })
+  }
+
 
   return (
     <div>
