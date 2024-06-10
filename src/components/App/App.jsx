@@ -50,6 +50,18 @@ function App () {
     })
   }
 
+  const completeTask = (id) => {
+    axios({
+      method: 'PUT',
+      url: `/api/todo/${id}`,
+      data: { completed: true }
+    }).then((response) => {
+      fetchTasks();
+    }).catch((error) => {
+      console.error('Completing task Error', error);
+    })
+  }
+
 
   return (
     <div>
