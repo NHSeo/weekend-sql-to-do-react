@@ -1,6 +1,11 @@
 import {useState, useEffect} from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DoneIcon from '@mui/icons-material/Done';
+
 import axios from 'axios';
 import './App.css';
+
 
 function App () {
   const [tasks, setTasks] = useState([]);
@@ -71,7 +76,7 @@ function App () {
         <form onSubmit={addTask}>
           <label htmlFor="New-task">Task: </label>
           <input id="New-task" onChange={(event) => setNewTask(event.target.value)} />
-          <button type="submit">Add Task</button>
+          <Button variant="outlined" color="primary" type="submit">Add Task</Button>
         </form>
         <h2>Task List</h2>
         <ul className="Task-list">
@@ -83,8 +88,8 @@ function App () {
                   <span> Completed </span>
                 ) : (
                   <>
-                    <button onClick={() => completeTask(task.id)}>Complete</button>
-                    <button onClick={() => deleteTask(task.id)}>Delete</button>
+                    <Button variant="contained" color="success" startIcon={<DoneIcon />} onClick={() => completeTask(task.id)}>Complete</Button>
+                    <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteTask(task.id)}>Delete</Button>
                   </>
                 )}
               </li>
@@ -98,8 +103,8 @@ function App () {
                   <span> - Completed</span>
                 ) : (
                   <>
-                    <button onClick={() => completeTask(task.id)}>Complete</button>
-                    <button onClick={() => deleteTask(task.id)}>Delete</button>
+                    <Button variant="contained" color="success" startIcon={<DoneIcon />} onClick={() => completeTask(task.id)}>Complete</Button>
+                    <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteTask(task.id)}>Delete</Button>
                   </>
                 )}
               </li>
